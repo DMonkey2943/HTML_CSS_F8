@@ -8,63 +8,57 @@
     <link rel="stylesheet" href="/BEM_Sample/BEM_Message/message_style.css">
 </head>
 <body>
+    <div id="toast"></div>
+
     <div>
-        <!-- Success -->
-        <div class="toast toast--sucess">
-            <div class="toast__icon">
-                <i class="fa-sharp fa-solid fa-circle-check"></i>
-            </div>
-            <div class="toast__body">
-                <h3 class="toast__title">Success</h3>
-                <p class="toast__msg">Bạn đã đăng ký thành công tài khoản tại F8.</p>
-            </div>
-            <div class="toast__close">
-                <i class="fa-solid fa-xmark"></i>
-            </div>
-        </div>
-
-        <!-- Info -->
-        <div class="toast toast--info">
-            <div class="toast__icon">
-                <i class="fa-sharp fa-solid fa-circle-check"></i>
-            </div>
-            <div class="toast__body">
-                <h3 class="toast__title">Success</h3>
-                <p class="toast__msg">Bạn đã đăng ký thành công tài khoản tại F8.</p>
-            </div>
-            <div class="toast__close">
-                <i class="fa-solid fa-xmark"></i>
-            </div>
-        </div>
-
-        <!-- Warning -->
-        <div class="toast toast--warning">
-            <div class="toast__icon">
-                <i class="fa-sharp fa-solid fa-circle-check"></i>
-            </div>
-            <div class="toast__body">
-                <h3 class="toast__title">Success</h3>
-                <p class="toast__msg">Bạn đã đăng ký thành công tài khoản tại F8.</p>
-            </div>
-            <div class="toast__close">
-                <i class="fa-solid fa-xmark"></i>
-            </div>
-        </div>
-
-        <!-- Error -->
-        <div class="toast toast--error">
-            <div class="toast__icon">
-                <i class="fa-sharp fa-solid fa-circle-check"></i>
-            </div>
-            <div class="toast__body">
-                <h3 class="toast__title">Success</h3>
-                <p class="toast__msg">Bạn đã đăng ký thành công tài khoản tại F8.</p>
-            </div>
-            <div class="toast__close">
-                <i class="fa-solid fa-xmark"></i>
-            </div>
-        </div>
-
+        <div class="btn btn--success">Show success toast</div>
+        <div class="btn btn--danger">Show error toast</div>
     </div>
+
+
+    <script>
+        // Toast function
+        function toast({ 
+            title = '', 
+            message = '', 
+            type = 'info', 
+            duration = 3000 
+        }) {
+            const main = document.getElementById('toast');
+            if(main){
+                const toast = document.createElement('div');
+                const icons = {
+                    success: 'fa-solid fa-circle-check',
+                    info: 'fa-solid fa-circle-info',
+                    warning: 'fa-solid fa-circle-exclamation',
+                    error: 'fa-solid fa-circle-exclamation',
+                };
+                const icon = icons[type];
+
+                toast.classList.add('toast', `toast--${type}`);
+                toast.innerHTML = `
+                    <div class="toast__icon">
+                        <i class="${icon}"></i>
+                    </div>
+                    <div class="toast__body">
+                        <h3 class="toast__title">${title}</h3>
+                        <p class="toast__msg">${message}</p>
+                    </div>
+                    <div class="toast__close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+                `;
+                main.appendChild(toast);
+            }
+        }
+
+        toast({
+            title: 'Success',
+            message: 'Chúc mừng bạn đã đăng ký thành công tài khoản tại F8.',
+            type: 'error',
+            duration: 3000
+        });
+    </script>
 </body>
+</html>
 </html>
